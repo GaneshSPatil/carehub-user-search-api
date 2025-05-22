@@ -29,6 +29,8 @@ const loadUsers = () => {
 
 // API: Search user by mobile number or msisdn
 app.get('/api/user-search', authenticate, (req, res) => {
+    console.log("User has requested for:", JSON.stringify(req.query))
+
     const { mobileNumber, msisdn } = req.query;
     const users = loadUsers();
 
