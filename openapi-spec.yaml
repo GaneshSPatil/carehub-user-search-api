@@ -1,0 +1,123 @@
+openapi: 3.0.3
+info:
+  title: Telecom User Search API
+  version: 1.1.0
+  description: |
+    This API allows searching for telecom users by mobile number or MSISDN.
+    **Authentication:** Bearer Token is required in the `Authorization` header.
+
+servers:
+  - url: https://carehub-user-search-api.onrender.com
+    description: Render Production Server
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT  # Optional, can be just "Bearer token"
+
+paths:
+  /api/user-search:
+    get:
+      summary: Search user by mobile number or MSISDN
+      description: Returns telecom user details by matching either mobile number or MSISDN.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: mobileNumber
+          in: query
+          description: Mobile number (e.g., 09171234567)
+          required: false
+          schema:
+            type: string
+        - name: msisdn
+          in: query
+          description: MSISDN (e.g., 639171234567)
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: User found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: user1
+                      name:
+                        type: string
+                        example: Juan Dela Cruz
+                      mobileNumber:
+                        type: string
+                        example: 09171234567
+                      msisdn:
+                        type: string
+                        example: 639171234567
+                      plan:
+                        type: string
+                        example: Prepaid
+                      balance:
+                        type: number
+                        example: 150.75
+                      status:
+                        type: string
+                        example: Active
+                      simType:
+                        type: string
+                        example: 4G
+                      network:
+                        type: string
+                        example: Globe
+                      lastTopUp:
+                        type: string
+                        format: date-time
+                        example: 2025-05-01T10:00:00Z
+        '401':
+          description: Missing or invalid token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: Missing or invalid Authorization header
+        '403':
+          description: Invalid or expired token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: Invalid or expired token
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: User not found
