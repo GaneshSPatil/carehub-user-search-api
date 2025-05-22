@@ -1,0 +1,26 @@
+[
+  {
+    "id": "user1",
+    "name": "Juan Dela Cruz",
+    "mobileNumber": "09171234567",
+    "msisdn": "639171234567",
+    "plan": "Prepaid",
+    "balance": 150.75,
+    "status": "Active",
+    "simType": "4G",
+    "network": "Globe",
+    "lastTopUp": "2025-05-01T10:00:00Z"
+  },
+  {
+    "id": "user2",
+    "name": "Maria Clara",
+    "mobileNumber": "09981234567",
+    "msisdn": "639981234567",
+    "plan": "Postpaid",
+    "balance": 0,
+    "status": "Inactive",
+    "simType": "5G",
+    "network": "Smart",
+    "lastTopUp": "2025-03-15T08:30:00Z"
+  }
+]
